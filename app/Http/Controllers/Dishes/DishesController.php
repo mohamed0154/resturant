@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dishes;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use App\Models\Category;
@@ -24,32 +25,29 @@ class DishesController extends Controller
 
     //Create Dishes
     public function create(){
-        $categories = Category::select('id','name')->get();
-        return view('dishes.add_dish',compact('categories'));
-    }
-
-
-    //Store
-     public function store(StoreDishRequest $request){
-        
-        // store Dish
-        $this->dishService->storeDish($request);
-        return redirect()->back()->with('success','Dish is created Successfully');
+        return $this->dishService->create();
     }
 
 
     //Dishes
-     public function index(){
-        $dishes=Dish::with('category:id,name')->select('id','name','category_id','description','image','price','quantity')->paginate(50);
+    public function index(){
+        return  $this->dishService->index();
 
-        return view('dishes.index',compact('dishes'));
     }
 
 
+
+    //Store
+     public function store(StoreDishRequest $request){
+      return  $this->dishService->storeDish($request);
+    }
+
+
+
     //edit
-     public function edit(Dish $dish){
-        $categories = Category::select('id','name')->get();
-        return view('dishes.edit',compact('categories','dish'));
+    public function edit(Dish $dish){
+        return  $this->dishService->edit($dish);
+
     }
 
 
@@ -57,8 +55,7 @@ class DishesController extends Controller
     // Update
      public function update(UpdateDishRequest $request,Dish $dish){
         // Update dish 
-        $this->dishService->updateDish($request,$dish);
-        return redirect()->back()->with('success','Dish Updated Successfully');
+      return  $this->dishService->updateDish($request,$dish);
     }
 
     // Destroy
@@ -67,4 +64,5 @@ class DishesController extends Controller
         return redirect()->back()->with('success','Dish Deleted Successfully');
     }
 
+  
 }

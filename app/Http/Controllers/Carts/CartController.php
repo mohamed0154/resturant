@@ -8,7 +8,7 @@ use App\services\CartServices;
 
 class CartController extends Controller
 {
-     // Service Container
+   // Dependency Injection
     private CartServices $cartService;
     public function __construct(CartServices $cartService) {
         $this->cartService = $cartService;
@@ -31,5 +31,18 @@ class CartController extends Controller
     //Decrease CartItems
     public function decrease(Cart $cart){
        return $this->cartService->decrease($cart);
+    }
+
+
+      //increase CartItems
+    public function increase($cart){
+       return $this->cartService->increaseQuantity($cart);
+    }
+
+
+
+        //destroy CartItems
+    public function destroy(Cart $cart){
+       return $this->cartService->destroy($cart);
     }
 }

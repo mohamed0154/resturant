@@ -39,18 +39,42 @@ class CartServices{
 
     //decrease cartItem
     public function decrease($cart){
+        
          if($cart->quantity == 1){
             $cart->delete();
             return redirect()->back();
         }
 
-        $cart->decrement('quantity');
-        $cart->total_price -= $cart->dish->price;
-        $cart->save();
+        $cart->update([
+            'quantity'=>$cart->quantity - 1,
+            'total_price'=>$cart->total_price - $cart->dish->price,
+        ]);
         return redirect()->back();
     }
 
 
+     //decrease cartItem
+    public function increaseQuantity($cart){
+        $cart = Cart::with('dish:id,quantity,price')->find($cart);
+
+         if($cart->quantity == $cart->dish->quantity){
+            return redirect()->back()->with('failed','You get The Maximum');
+        }
+
+        $cart->update([
+            'quantity'=>$cart->quantity + 1,
+            'total_price'=>$cart->total_price + $cart->dish->price,
+        ]);
+        return redirect()->back();
+    }
+
+
+
+    //Destroy Item
+    public function destroy($cart){
+        $cart->delete();
+        return redirect()->back();
+    }
 
     //check user
     public function userValidated($user_id){

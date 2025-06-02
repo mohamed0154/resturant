@@ -4,6 +4,9 @@
 
     <section class="min-h-screen bg-gray-100 p-4 md:p-8">
         <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+            {{-- messages --}}
+            @include('layouts.messages.flash_message')
+            {{-- Header --}}
             <h1 class="text-2xl font-bold text-gray-800 mb-6">Your Cart</h1>
 
             <!-- Cart Item -->
@@ -21,7 +24,7 @@
                         </div>
                         <div class="flex items-center gap-3 ">
 
-                            <a href="#"
+                            <a href="{{ route('users.carts.increase', $item->id) }}"
                                 class="w-6 h-6 flex items-center justify-center bg-gray-200 text-gray-700 rounded hover:bg-gray-300 text-lg">
                                 +
                             </a>
@@ -29,7 +32,16 @@
                                 class="w-6 h-6 flex items-center justify-center bg-red-200 text-gray-700 rounded hover:bg-red-300 text-lg">
                                 -
                             </a>
-                            <button class="text-red-600 hover:underline text-sm">Remove</button>
+                            <a href="{{ route('users.carts.destroy', $item->id) }}"
+                                class="text-red-600 hover:underline text-sm">
+                                <!-- Trash Icon (Solid) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+
+                            </a>
                         </div>
                     </div>
                 @empty

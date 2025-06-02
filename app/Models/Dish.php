@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 
 class Dish extends Model
 {
-    use HasFactory;
+    use HasFactory,Searchable ;
 
     protected $fillable = ['name','price','description','image','category_id'];
 
@@ -24,4 +25,13 @@ class Dish extends Model
     {
         return $this->belongsToMany(User::class,'carts');
     }
+
+    public function toSearchableArray(): array
+
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
+    
 }

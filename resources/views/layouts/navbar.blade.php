@@ -79,6 +79,9 @@
         </div>
 
         <!-- Right elements -->
+        {{-- Search --}}
+
+        {{-- cart --}}
         <div class="relative flex items-center">
             @auth
                 <!-- Icon -->
@@ -165,7 +168,6 @@
                     @endforeach
                 </ul>
             </div>
-
 
 
             <!-- Second dropdown container -->

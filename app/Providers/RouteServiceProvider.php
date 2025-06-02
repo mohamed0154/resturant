@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Mcamara\LaravelLocalization\LaravelLocalization as LaravelLocalizationLaravelLocalization;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,17 +27,36 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        /// Rate limitting for storing Cart Item
+        RateLimiter::for('order', function (Request $request) {
+            return Limit::perMinute(10)->by($request->user()?->id ?: $request->ip())
+            ->response(function (Request $request, array $headers) {
+                return response()->json([
+                    'message' => 'Too many requests. You get the Maximum.',
+                    'retry_after' => $headers['Retry-After']
+                ], 429);
+            });
         });
+
+        // rate limitting for login
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(4)->by($request->user()?->id ?: $request->ip()) 
+            ->response(function (Request $request, array $headers) {
+                return response()->json([
+                    'message' => 'Too many requests. Please try again later.',
+                    'retry_after' => $headers['Retry-After']
+                ], 429);
+            });
+        });
+
+
 
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware(['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])
-                ->prefix(LaravelLocalization::setLocale() . '/users')
+            Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
             Route::middleware(['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])
@@ -47,6 +65,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/admin.php'));    
             });
 
-	
+            
     }
+
+
 }
