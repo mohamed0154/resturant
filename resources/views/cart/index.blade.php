@@ -6,7 +6,7 @@
         <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
             {{-- messages --}}
             @include('layouts.messages.flash_message')
-            {{-- Header --}}
+            {{-- Heading --}}
             <h1 class="text-2xl font-bold text-gray-800 mb-6">Your Cart</h1>
 
             <!-- Cart Item -->
@@ -56,9 +56,10 @@
                 <p class="text-xl font-bold text-gray-800">
                     Total: ${{ $total_price ?? $total_price }}
                 </p>
-                <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                <a href='{{ route('users.payment') }}'
+                    class="mt-4 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
                     Checkout
-                </button>
+                </a>
             </div>
         </div>
     </section>

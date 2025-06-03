@@ -34,5 +34,4 @@ Route::middleware('admin')->group(function(){
     //orders
     Route::resource('orders',OrderController::class)->except(['create','destroy']);
 
-
 });

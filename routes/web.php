@@ -8,6 +8,7 @@ use App\Http\Controllers\Categories\CategoryController;
 use App\Http\Controllers\Dishes\SearchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Orders\OrderController;
+use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -58,6 +59,13 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() . '/users','as'=>'users
     Route::get('/carts/decrease/{cart}',[CartController::class,'decrease'])->name('carts.decrease');
     Route::get('/carts/increase/{cart}',[CartController::class,'increase'])->name('carts.increase');
     Route::get('/carts/destroy/{cart}',[CartController::class,'destroy'])->name('carts.destroy');
+
+
+    //Payment
+    Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
+
+    //order
+    Route::get('/orders/store',[OrderController::class, 'store'])->name('orders.store');
 
     // Logout
     Route::post('/logout',[LogoutController::class,'logout'])->name('logout');

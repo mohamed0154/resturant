@@ -4,7 +4,7 @@
     <!-- Categories Section -->
     <section class="py-16 px-6">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-red-600 mb-10">Browse Categories</h2>
+            <h2 class="text-3xl font-bold text-center text-red-600 mb-10">{{ __('messages.Browse Categories') }}</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Starters -->
