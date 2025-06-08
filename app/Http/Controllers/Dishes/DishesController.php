@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Dishes;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
-use App\Models\Category;
 use App\Models\Dish;
 use App\services\DishServices;
 use App\Traits\Media;
-use Illuminate\Http\Request;
 
 class DishesController extends Controller
 {

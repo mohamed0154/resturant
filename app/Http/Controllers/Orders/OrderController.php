@@ -3,13 +3,8 @@
 namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
-use App\Models\Order;
-use App\Models\OrderItem;
 use App\services\OrderServices;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Stripe\StripeClient;
 
 class OrderController extends Controller
 {
