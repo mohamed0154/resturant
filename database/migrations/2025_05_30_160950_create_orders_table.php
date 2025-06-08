@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,15 +12,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('items');
-            $table->bigInteger('Phone');
-            $table->integer('quantity');
-            $table->decimal('Total',8,2);
-            $table->enum('status',[0,1])->default(0);
-            $table->date('date');
+            $table->decimal('total_price', 8, 2);
+            $table->enum('status', ['pending', 'preparing', 'completed'])->default('pending');
+            $table->boolean('payment');
+            $table->string('stripe_session_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->date('date');
             $table->timestamps();
         });
     }

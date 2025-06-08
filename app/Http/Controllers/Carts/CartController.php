@@ -9,12 +9,9 @@ use App\services\CartServices;
 class CartController extends Controller
 {
     // Dependency Injection
-    private CartServices $cartService;
-
-    public function __construct(CartServices $cartService)
-    {
-        $this->cartService = $cartService;
-    }
+    public function __construct(
+        private CartServices $cartService
+    ) {}
 
     // Cart Items
     public function index()

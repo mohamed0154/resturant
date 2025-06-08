@@ -55,27 +55,19 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm">
-                            <tr class="border-b">
-                                <td class="p-4">#1023</td>
-                                <td class="p-4">Sarah Ahmed</td>
-                                <td class="p-4">2 Dishes</td>
-                                <td class="p-4">$24.99</td>
-                                <td class="p-4 text-green-600">Completed</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="p-4">#1024</td>
-                                <td class="p-4">Mohamed Ali</td>
-                                <td class="p-4">3 Dishes</td>
-                                <td class="p-4">$36.75</td>
-                                <td class="p-4 text-yellow-600">Pending</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">#1025</td>
-                                <td class="p-4">Fatma Youssef</td>
-                                <td class="p-4">1 Dish</td>
-                                <td class="p-4">$12.00</td>
-                                <td class="p-4 text-red-600">Cancelled</td>
-                            </tr>
+
+                            @forelse ($orders as $order)
+                                <tr class="border-b">
+                                    <td class="p-4">#{{ $order->id }}</td>
+                                    <td class="p-4">{{ $order->user->full_name }}</td>
+                                    <td class="p-4">{{ $order->order_items_count }}</td>
+                                    <td class="p-4">{{ $order->total_price }}</td>
+                                    <td class="p-4 text-green-600">{{ $order->status }}</td>
+                                </tr>
+                            @empty
+                            @endforelse
+
+
                         </tbody>
                     </table>
                 </div>

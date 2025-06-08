@@ -4,35 +4,46 @@ namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\services\OrderServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stripe\StripeClient;
 
 class OrderController extends Controller
 {
+    public function __construct(
+        private OrderServices $orderService
+    ) {}
+
+    // All Orders
     public function index()
     {
-        return view('orders.index');
+        return $this->orderService->indexService();
     }
 
+    // Orders for user
+    public function user_orders()
+    {
+        return $this->orderService->userOrdersService();
+    }
+
+    // Store Order
     public function store(Request $request)
     {
-        $sessionId = $request->query('session_id');
+        return $this->orderService->storeService($request);
+    }
 
-        if (!$sessionId) {
-            return redirect()->route('users.carts.index')->with('error', 'Invalid payment session');
-        }
+    // Show Order
+    public function show($order)
+    {
+        return $this->orderService->showService($order);
+    }
 
-        $stripe = new StripeClient(config('stripe.api_key.secret'));
-        $session = $stripe->checkout->sessions->retrieve($sessionId);
-
-        // Check if payment was successful
-        if ($session->payment_status !== 'paid') {
-            return redirect()->route('users.carts.index')->with('error', 'Payment not completed');
-        }
-
-        Cart::where('user_id', Auth::id())->delete();
-
-        return redirect()->route('users.carts.index')->with('success', 'Payment is completed');
+    // destroy Order
+    public function destroy($order)
+    {
+        return $this->orderService->deleteService($order);
     }
 }

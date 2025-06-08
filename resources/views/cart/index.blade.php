@@ -52,15 +52,18 @@
             </div>
 
             <!-- Total Section -->
-            <div class="mt-6 text-right">
-                <p class="text-xl font-bold text-gray-800">
-                    Total: ${{ $total_price ?? $total_price }}
-                </p>
-                <a href='{{ route('users.payment') }}'
-                    class="mt-4 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
-                    Checkout
-                </a>
-            </div>
+            @if ($total_price)
+                <div class="mt-6 text-right">
+                    <p class="text-xl font-bold text-gray-800">
+                        Total: ${{ $total_price }}
+                    </p>
+                    <a href='{{ route('users.payment') }}'
+                        class="inline-block mt-4 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                        Checkout
+                    </a>
+
+                </div>
+            @endif
         </div>
     </section>
 @endsection

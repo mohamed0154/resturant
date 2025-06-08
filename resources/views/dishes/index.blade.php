@@ -2,8 +2,6 @@
 @section('title', 'dishes')
 @section('content')
 
-
-
     <!-- Dishes Section -->
     <section class="py-16 px-6">
         <div class="container mx-auto">

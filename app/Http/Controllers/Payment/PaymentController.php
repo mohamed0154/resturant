@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    private PaymentServices $paymentService;
-    public function __construct(PaymentServices $paymentService) {
-        $this->paymentService = $paymentService;
-    }
-    
+    public function __construct(
+        private PaymentServices $paymentService
+    ) {}
 
-
-    public function payment(){
+    public function payment()
+    {
         return $this->paymentService->payment();
     }
 }

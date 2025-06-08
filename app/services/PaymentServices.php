@@ -4,6 +4,7 @@ namespace App\services;
 
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Stripe\StripeClient;
 
 class PaymentServices
@@ -20,16 +21,25 @@ class PaymentServices
     // Payment
     public function payment()
     {
-        $cart_items = Cart::with('dish:id,name,image,price')->where('user_id', Auth::user()->id)->get();
-        // Check Chart Items
-        if (empty($cart_items->toArray()))
-            return redirect()->back();
+        DB::beginTransaction();
 
-        // Make LineItems
-        $line_items = $this->createLineItems($cart_items);
+        try {
+            $cart_items = Cart::with('dish:id,name,image,price')->where('user_id', Auth::id())->get();
+            // Check Chart Items
+            if (empty($cart_items->toArray()))
+                return redirect()->back();
 
-        // Create Session
-        return $this->createSession($line_items);
+            // Make LineItems
+            $line_items = $this->createLineItems($cart_items);
+
+            // Create Session
+            return $this->createSession($line_items);
+
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('failed', 'Payment Not completed');
+        }
     }
 
     // Make LineItems

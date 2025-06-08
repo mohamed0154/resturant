@@ -8,29 +8,22 @@ use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
 {
-    
-    
     public function logout(Request $request)
+    {
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+            $request->session()->invalidate();
 
-{
+            $request->session()->regenerateToken();
 
-    if(Auth::guard('admin')->check()){
-        Auth::guard('admin')->logout();
-           $request->session()->invalidate();
+            return to_route('admin.login');
+        }
+        Auth::logout();
 
-         $request->session()->regenerateToken();
+        $request->session()->invalidate();
 
- 
-         return to_route('admin.login');
+        $request->session()->regenerateToken();
+
+        return to_route('login');
     }
-    Auth::logout();
-    
-    $request->session()->invalidate();
-
-    $request->session()->regenerateToken();
-
- 
-    return to_route('login');
-
-}
 }

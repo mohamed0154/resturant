@@ -10,14 +10,13 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    private SearchServices $searchService;
-    public function __construct(SearchServices $searchService) {
-        $this->searchService = $searchService;
-    }
+    public function __construct(
+        private SearchServices $searchService
+    ) {}
 
-
-    public function search(SearchRequest $request){
-        $dishes= $this->searchService->searchServices($request->q);
-        return view('dishes.index',compact('dishes'));
+    public function search(SearchRequest $request)
+    {
+        $dishes = $this->searchService->searchServices($request->q);
+        return view('dishes.index', compact('dishes'));
     }
 }

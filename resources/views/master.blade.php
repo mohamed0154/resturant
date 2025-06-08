@@ -11,27 +11,30 @@
 <body class="bg-gray-100 text-gray-800">
 
 
-    <!-- Navbar -->
-    @include('layouts.navbar')
 
+
+
+    {{-- Align Content --}}
     <div class="flex min-h-screen">
         {{-- Sidebar --}}
         @include('layouts.sidebar')
-
-        <!-- Main Content -->
-        <main class="flex-1 p-6">
-            @yield('content')
-            {{-- <div class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-2xl font-bold text-red-600 mb-4">Welcome to TasteBite Admin Dashboard</h2>
-                <p class="text-gray-700">Select a section from the sidebar to manage your restaurant.</p>
-            </div> --}}
-        </main>
+        <div class="flex-1">
+            <!-- Navbar -->
+            @include('layouts.navbar')
+            <!-- Main Content -->
+            <main>
+                @yield('content')
+            </main>
+        </div>
     </div>
+
+
+
+    {{-- Footer --}}
     @include('layouts.footer')
 
     <!-- Include Alpine.js in your layout if not already -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 </body>
 
 </html>

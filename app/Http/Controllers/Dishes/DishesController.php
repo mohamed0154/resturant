@@ -17,52 +17,45 @@ class DishesController extends Controller
     use Media;
 
     // Service Container
-    private DishServices $dishService;
-    public function __construct(DishServices $dishService) {
-        $this->dishService = $dishService;
-    }
+    public function __construct(
+        private DishServices $dishService
+    ) {}
 
-
-    //Create Dishes
-    public function create(){
+    // Create Dishes
+    public function create()
+    {
         return $this->dishService->create();
     }
 
-
-    //Dishes
-    public function index(){
-        return  $this->dishService->index();
-
+    // Dishes
+    public function index()
+    {
+        return $this->dishService->index();
     }
 
-
-
-    //Store
-     public function store(StoreDishRequest $request){
-      return  $this->dishService->storeDish($request);
+    // Store
+    public function store(StoreDishRequest $request)
+    {
+        return $this->dishService->storeDish($request);
     }
 
-
-
-    //edit
-    public function edit(Dish $dish){
-        return  $this->dishService->edit($dish);
-
+    // edit
+    public function edit(Dish $dish)
+    {
+        return $this->dishService->edit($dish);
     }
-
-
 
     // Update
-     public function update(UpdateDishRequest $request,Dish $dish){
-        // Update dish 
-      return  $this->dishService->updateDish($request,$dish);
+    public function update(UpdateDishRequest $request, Dish $dish)
+    {
+        // Update dish
+        return $this->dishService->updateDish($request, $dish);
     }
 
     // Destroy
-    public function destroy(Dish $dish){
+    public function destroy(Dish $dish)
+    {
         $dish->delete();
-        return redirect()->back()->with('success','Dish Deleted Successfully');
+        return redirect()->back()->with('success', 'Dish Deleted Successfully');
     }
-
-  
 }

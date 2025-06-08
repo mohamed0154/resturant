@@ -7,10 +7,5 @@
     <!-- About Section -->
     @include('layouts.about')
 
-    <!-- Menu Section -->
-    @include('layouts.menu')
-
-    <!-- Contact Section -->
-    @include('layouts.contact_us')
 
 @endsection

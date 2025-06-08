@@ -1,28 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Orders | TasteBite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-gray-100 text-gray-800">
-
-    <!-- Header -->
-    <header class="bg-white shadow sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center p-4">
-            <h1 class="text-2xl font-bold text-red-600">TasteBite</h1>
-            <nav class="space-x-6 text-gray-700">
-                <a href="index.html" class="hover:text-red-600">Home</a>
-                <a href="menu.html" class="hover:text-red-600">Menu</a>
-                <a href="#" class="text-red-600 font-semibold">My Orders</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Orders Table -->
+@extends('master')
+@section('title', 'home')
+@section('content')
+    Orders Table -->
     <main class="max-w-5xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
         <h2 class="text-2xl font-bold text-red-600 mb-6">My Orders</h2>
 
@@ -74,12 +53,4 @@
             </table>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
-        <p>&copy; 2025 TasteBite. All rights reserved.</p>
-    </footer>
-
-</body>
-
-</html>
+@endsection

@@ -13,36 +13,35 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthUserController extends Controller
 {
-
     // Service Container
-    private AuthenticationServices $authService;
-    public function __construct(AuthenticationServices $authService) {
-        $this->authService = $authService;
-    }
-  
-    //Create User
-    public function register_view(){
+    public function __construct(
+        private AuthenticationServices $authService
+    ) {}
+
+    // Create User
+    public function register_view()
+    {
         return view('auth.register');
     }
 
-    //Store User
-     public function register(RegisterRequest $request){
-
+    // Store User
+    public function register(RegisterRequest $request)
+    {
         $this->authService->register($request);
-        return to_route('register_view')->with('success','You can Login Now');
+        return to_route('register_view')->with('success', 'You can Login Now');
     }
 
-    
-    //Login View
-      public function login_view(){
+    // Login View
+    public function login_view()
+    {
         return view('auth.login');
     }
 
-
-    //login
-    public function login(LoginRequest $request){
-        //Login
-        $this->authService->login($request,'web','users.home');
-        return redirect()->back()->with('failed','Email or Password Not Valid');
+    // login
+    public function login(LoginRequest $request)
+    {
+        // Login
+        $this->authService->login($request, 'web', 'users.home');
+        return redirect()->back()->with('failed', 'Email or Password Not Valid');
     }
 }

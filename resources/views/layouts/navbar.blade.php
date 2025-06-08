@@ -30,51 +30,37 @@
             <ul class="list-style-none me-auto flex flex-col ps-0 lg:flex-row" data-twe-navbar-nav-ref>
                 @auth('admin')
                     <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                        <!-- Dashboard link -->
-                        <a class="text-black transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none  hover:text-black/80 focus:text-black/80 active:text-black/80 lg:px-2"
-                            href="#" data-twe-nav-link-ref>Dashboard</a>
+                        <a class="text-black transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                            href="#">{{ __('messages.dashboard') }}</a>
                     </li>
                 @endauth
                 @auth
+                    <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                        <a class="text-black transition duration-200 hover:text-black hover:ease-in-out focus:text-black active:text-black/80 motion-reduce:transition-none lg:px-2"
+                            href="{{ route('users.home') }}">{{ __('messages.home') }}</a>
+                    </li>
 
                     <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                        <!-- Dashboard link -->
-                        <a class="text-black transition duration-200 hover:text-black hover:ease-in-out focus:text-black active:text-black/80 motion-reduce:transition-none  hover:text-black/80 focus:text-black/80 active:text-black/80 lg:px-2"
-                            href="{{ route('users.home') }}" data-twe-nav-link-ref>Home</a>
-                    </li>
-                    <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                        <!-- Dashboard link -->
-                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none  hover:text-black/80 focus:text-black/80 active:text-black/80 lg:px-2"
-                            href="#about" data-twe-nav-link-ref>about</a>
-                    </li>
-                    <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                        <!-- Dashboard link -->
-                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none  hover:text-black/80 focus:text-black/80 active:text-black/80 lg:px-2"
-                            href="#contact" data-twe-nav-link-ref>contact</a>
+                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                            href="{{ route('users.contact.create') }}">{{ __('messages.contact') }}</a>
                     </li>
                 @elseif (!auth('admin')->user())
-                    <!-- Team link -->
                     <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none  hover:text-black/80 focus:text-black/80 active:text-black/80 lg:px-2"
-                            href="{{ route('login') }}" data-twe-nav-link-ref>Login</a>
+                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                            href="{{ route('login') }}">{{ __('messages.Login') }}</a>
                     </li>
-                    <!-- Projects link -->
                     <li class="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none  hover:text-black/80 focus:text-black/80 active:text-black/80 lg:px-2"
-                            href="{{ route('register_view') }}" data-twe-nav-link-ref>register</a>
+                        <a class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                            href="{{ route('register_view') }}">{{ __('messages.register') }}</a>
                     </li>
                 @endauth
             </ul>
-            <!-- Left links -->
         </div>
 
         <!-- Right elements -->
-
-        {{-- cart --}}
         <div class="relative flex items-center">
             @auth
-                <!-- Icon -->
-                <a class=" text-neutral-600 text-white" href="{{ route('users.carts.index') }}">
+                <a class="text-blue-400" href="{{ route('users.carts.index') }}">
                     <span class="[&>svg]:w-5">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path
@@ -84,14 +70,9 @@
                 </a>
             @endauth
 
-
-
-
             <div x-data="{ open: false }" class="relative mx-5 inline-block text-left">
-                <!-- Trigger Button -->
                 <button @click="open = !open"
                     class="inline-flex items-center gap-1 px-3 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-100 focus:outline-none">
-                    <!-- Earth Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -99,15 +80,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M2.5 12h19M12 2.5v19M4.21 4.21c5.87 5.87 9.71 5.87 15.58 0" />
                     </svg>
-                    <span class="text-sm text-gray-700">Language</span>
-                    <!-- Down Arrow -->
+                    <span class="text-sm text-gray-700">{{ __('messages.language') }}</span>
                     <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
 
-                <!-- Dropdown -->
                 <ul x-show="open" @click.away="open = false"
                     class="absolute z-50 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg py-1">
                     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -122,36 +101,29 @@
                 </ul>
             </div>
 
-
-            <!-- Second dropdown container -->
             <div class="relative" data-twe-dropdown-ref data-twe-dropdown-alignment="end">
-                <!-- Second dropdown trigger -->
                 <a class="flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                     href="#" id="dropdownMenuButton2" role="button" data-twe-dropdown-toggle-ref
                     aria-expanded="false">
-                    <!-- User avatar -->
                     <img src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg" class="rounded-full"
                         style="height: 25px; width: 25px" alt="" loading="lazy" />
                 </a>
-                <!-- Second dropdown menu -->
                 <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg data-[twe-dropdown-show]:block bg-surface-dark"
                     aria-labelledby="dropdownMenuButton2" data-twe-dropdown-menu-ref>
-                    <!-- Second dropdown menu items -->
                     <li>
-                        <a class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline bg-surface-dark text-white hover:bg-neutral-800/25 focus:bg-neutral-800/25 active:bg-neutral-800/25"
-                            href="#" data-twe-dropdown-item-ref>Action</a>
+                        <a class="block w-full whitespace-nowrap px-4 py-2 text-sm text-white hover:bg-neutral-800/25"
+                            href="#">{{ __('messages.action') }}</a>
                     </li>
                     <li>
-                        <a class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline bg-surface-dark text-white hover:bg-neutral-800/25 focus:bg-neutral-800/25 active:bg-neutral-800/25"
-                            href="#" data-twe-dropdown-item-ref>Another action</a>
+                        <a class="block w-full whitespace-nowrap px-4 py-2 text-sm text-white hover:bg-neutral-800/25"
+                            href="#">{{ __('messages.another_action') }}</a>
                     </li>
                     <li>
-                        <a class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline bg-surface-dark text-white hover:bg-neutral-800/25 focus:bg-neutral-800/25 active:bg-neutral-800/25"
-                            href="#" data-twe-dropdown-item-ref>Something else here</a>
+                        <a class="block w-full whitespace-nowrap px-4 py-2 text-sm text-white hover:bg-neutral-800/25"
+                            href="#">{{ __('messages.something_else') }}</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- Right elements -->
     </div>
 </nav>

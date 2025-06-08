@@ -8,34 +8,34 @@ use App\Models\Category;
 use App\services\CategoryServices;
 use App\Traits\Media;
 
-
 class CategoryController extends Controller
 {
     use Media;
 
+    // Service Container
 
-      // Service Container
-    private CategoryServices $categoryService;
-    public function __construct(CategoryServices $categoryService) {
-        $this->categoryService = $categoryService;
-    }
+    public function __construct(
+        private CategoryServices $categoryService
+    ) {}
 
-
-    //create
-    public function create(){
+    // create
+    public function create()
+    {
         return view('categories.create');
     }
 
+    // index
 
-     //index
-    public function index(){
-        $categories=Category::select('name','image')->get();
-        return view('categories.index',compact('categories'));
+    public function index()
+    {
+        $categories = Category::select('name', 'image')->get();
+        return view('categories.index', compact('categories'));
     }
 
     // store
-    public function store(StoreCategoryRequest $request){
+    public function store(StoreCategoryRequest $request)
+    {
         $this->categoryService->storeCategory($request);
-       return redirect()->back()->with('success','Category Created successfully');
+        return redirect()->back()->with('success', 'Category Created successfully');
     }
 }
