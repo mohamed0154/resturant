@@ -4,7 +4,7 @@
 
 ## ✨ Key Features
 - 🔐 **Multi Authentication System**
-  - Admin/POS/User roles with middleware protection
+  - Admin/User roles with middleware protection
   - Social Login (Google & GitHub via Socialite)
 - 💳 **Stripe Payment Integration**
 - 🛡️ **Security Features**
